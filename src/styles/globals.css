@@ -2,9 +2,16 @@
 @import 'tw-animate-css';
 
 /*
- * Design tokens — derived from docs/design-principles.md.
- * Warm, editorial palette: off-white background, near-black ink,
- * neutral gray for secondary text, champagne gold as the only accent.
+ * Design tokens — derived from docs/design-principles.md and docs/animation-principles.md.
+ * Warm, editorial palette: off-white background, near-black ink, neutral gray for
+ * secondary text, champagne gold as the only accent.
+ *
+ * Two layers are used throughout this file:
+ *  - `:root`        raw, semantic values (also readable as plain CSS variables).
+ *  - `@theme inline` aliases those values under Tailwind v4's theme namespaces so
+ *                     utility classes (bg-primary, text-display-lg, ease-editorial, …)
+ *                     are generated from the same source of truth. No design value
+ *                     should be duplicated outside of this file.
  */
 :root {
   --background: #f7f4ef;
@@ -36,6 +43,11 @@
   --ink: #14110d;
   --ink-foreground: #f7f4ef;
 
+  /* Hover/interaction shades — near-black and gold have little room to darken,
+     so hover states move toward these purpose-built shades rather than opacity hacks. */
+  --primary-hover: #2a2620;
+  --accent-hover: #b5924f;
+
   --radius: 0.125rem;
 
   /*
@@ -45,6 +57,30 @@
    */
   --font-display: 'Playfair Display', ui-serif, Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /*
+   * Motion timing — durations mirror docs/animation-principles.md's bands
+   * (fast interactions, normal transitions, hero storytelling). Mirrored as
+   * JS constants in src/constants/motion.ts for Framer Motion/GSAP, which take
+   * numeric seconds rather than CSS duration strings — CSS vars can't cross
+   * that boundary without an extra getComputedStyle read, which isn't worth it.
+   */
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --duration-hero: 900ms;
+
+  /*
+   * Z-index scale — semantic layers, consumed via arbitrary values
+   * (e.g. `z-[var(--z-overlay)]`) so stacking order stays centralized.
+   * Mirrored as JS constants in src/constants/z-index.ts.
+   */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
 }
 
 @theme inline {
@@ -56,6 +92,7 @@
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -65,6 +102,7 @@
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
 
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -83,6 +121,67 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /*
+   * Type scale — fluid (clamp-based) so headings resize continuously across
+   * viewports instead of jumping at breakpoints. Font-size/line-height pairs
+   * follow Tailwind v4's `--text-*` / `--text-*--line-height` convention.
+   */
+  --text-display-xl: clamp(3rem, 2.1rem + 4.2vw, 6.5rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-lg: clamp(2.5rem, 1.9rem + 2.8vw, 4.5rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-md: clamp(2rem, 1.6rem + 1.8vw, 3.25rem);
+  --text-display-md--line-height: 1.1;
+
+  --text-heading-lg: clamp(1.5rem, 1.3rem + 0.9vw, 2.25rem);
+  --text-heading-lg--line-height: 1.2;
+  --text-heading-md: clamp(1.25rem, 1.13rem + 0.55vw, 1.75rem);
+  --text-heading-md--line-height: 1.25;
+  --text-heading-sm: clamp(1.125rem, 1.05rem + 0.32vw, 1.375rem);
+  --text-heading-sm--line-height: 1.3;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.7;
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.6;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+
+  /* Letter spacing — extends Tailwind's default tracking scale with an
+     extra-wide value for uppercase editorial labels/eyebrows. */
+  --tracking-label: 0.2em;
+
+  /* Additional breakpoint for fine mobile control below Tailwind's default `sm` (40rem). */
+  --breakpoint-xs: 30rem;
+
+  /*
+   * Container widths — semantic max-widths for the Container layout primitive.
+   * `content` is the default editorial measure; `narrow` suits text-heavy copy
+   * blocks (bios, statements); `wide` allows full-bleed editorial spreads.
+   */
+  --container-narrow: 48rem;
+  --container-content: 88rem;
+  --container-wide: 100rem;
+
+  /*
+   * Section spacing — fluid vertical rhythm for the Section layout primitive.
+   * Scales smoothly between mobile and desktop instead of switching abruptly
+   * at a breakpoint, per the responsive philosophy in AGENTS.md.
+   */
+  --spacing-section-sm: clamp(3rem, 2.3rem + 3vw, 5rem);
+  --spacing-section-md: clamp(4rem, 2.9rem + 4.8vw, 7rem);
+  --spacing-section-lg: clamp(5rem, 3.4rem + 6.8vw, 9rem);
+
+  /* Easing — smooth, non-bouncy curves per docs/animation-principles.md. */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @layer base {

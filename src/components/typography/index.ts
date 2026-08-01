@@ -1,0 +1,6 @@
+export { LargeDisplay, type LargeDisplayProps } from './LargeDisplay'
+export { EditorialHeading, type EditorialHeadingProps } from './EditorialHeading'
+export { SectionHeading, type SectionHeadingProps } from './SectionHeading'
+export { SectionLabel, type SectionLabelProps } from './SectionLabel'
+export { BodyText, type BodyTextProps } from './BodyText'
+export { Caption, type CaptionProps } from './Caption'

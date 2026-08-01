@@ -1,0 +1,22 @@
+import { useSyncExternalStore } from 'react'
+
+const QUERY = '(prefers-reduced-motion: reduce)'
+
+function subscribe(callback: () => void) {
+  const mediaQueryList = window.matchMedia(QUERY)
+  mediaQueryList.addEventListener('change', callback)
+  return () => mediaQueryList.removeEventListener('change', callback)
+}
+
+function getSnapshot() {
+  return window.matchMedia(QUERY).matches
+}
+
+function getServerSnapshot() {
+  return false
+}
+
+/** Tracks the user's OS-level `prefers-reduced-motion` setting. Gate non-essential motion on this. */
+export function usePrefersReducedMotion() {
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
