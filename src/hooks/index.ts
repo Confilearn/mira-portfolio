@@ -1,3 +1,6 @@
 export { usePrefersReducedMotion } from './usePrefersReducedMotion'
 export { useBreakpoint } from './useBreakpoint'
 export { useScrollDirection } from './useScrollDirection'
+export { useScrolled } from './useScrolled'
+export { useLockBodyScroll } from './useLockBodyScroll'
+export { useFocusTrap } from './useFocusTrap'
