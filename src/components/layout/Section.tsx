@@ -14,7 +14,7 @@ const TONE_CLASSES: Record<Tone, string> = {
 }
 
 export interface SectionProps extends ComponentPropsWithoutRef<'section'> {
-  as?: 'section' | 'div'
+  as?: 'section' | 'div' | 'footer'
   /** Vertical rhythm. Defaults to `md`. */
   spacing?: SectionSpacing
   /** Light (default) or inverse dark surface. */
