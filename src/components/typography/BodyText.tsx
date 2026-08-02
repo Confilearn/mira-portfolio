@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react'
 import { cn } from '@/lib/utils'
 
-type BodyTextElement = 'p' | 'span' | 'div'
+type BodyTextElement = 'p' | 'span' | 'div' | 'dt' | 'dd'
 type BodyTextSize = 'lg' | 'base' | 'sm'
 
 const SIZE_CLASSES: Record<BodyTextSize, string> = {
