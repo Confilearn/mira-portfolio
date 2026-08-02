@@ -6,6 +6,6 @@ export const AGENCY_CONTENT = {
     'Represented for editorial, runway and campaign work across the United Kingdom, Italy, Spain and wider Europe.',
   cta: {
     label: 'Enquire Through Agency',
-    href: 'https://zanemodels.com',
+    href: 'https://zanemodels.com/',
   },
 } as const

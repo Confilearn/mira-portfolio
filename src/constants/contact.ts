@@ -3,7 +3,7 @@ import { AGENCY_CONTENT } from './agency'
 import { GALLERY_CONTENT } from './gallery'
 
 const CONTACT_LINKS: ContactChannel[] = [
-  { id: 'instagram', label: 'Instagram', href: 'https://instagram.com/miraelizabethokeke' },
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/miraclechukwuemeka_' },
   { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/447000000000' },
   { id: 'agency', label: 'Zane Models', href: AGENCY_CONTENT.cta.href },
 ]
@@ -16,7 +16,7 @@ const CONTACT_LINKS: ContactChannel[] = [
  */
 export const CONTACT_CONTENT = {
   sheet: {
-    label: '@miraelizabethokeke',
+    label: '@miraclechukwuemeka_',
     heading: 'Contact Sheet',
     images: GALLERY_CONTENT.images,
   },
