@@ -16,3 +16,14 @@ export const EASE = {
   soft: [0.22, 1, 0.36, 1],
   inOutSoft: [0.65, 0, 0.35, 1],
 } as const satisfies Record<string, [number, number, number, number]>
+
+/**
+ * GSAP ease identifiers. GSAP doesn't accept the cubic-bezier arrays above
+ * (that's Framer Motion's format) — these are GSAP's closest built-in
+ * equivalents to the same curves, for GSAP timelines/tweens only.
+ */
+export const GSAP_EASE = {
+  editorial: 'expo.out',
+  soft: 'power4.out',
+  inOutSoft: 'power2.inOut',
+} as const

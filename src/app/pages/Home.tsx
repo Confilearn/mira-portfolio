@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async'
 import { Navbar } from '@/components/navigation'
+import { HERO_CONTENT } from '@/constants/hero'
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants/site'
+import { HeroSection } from '@/sections/Hero'
 
 export default function Home() {
   return (
@@ -8,11 +10,11 @@ export default function Home() {
       <Helmet>
         <title>{SITE_TITLE}</title>
         <meta name="description" content={SITE_DESCRIPTION} />
+        <link rel="preload" as="image" href={HERO_CONTENT.image.src} fetchPriority="high" />
       </Helmet>
       <Navbar />
-      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center">
-        <h1 className="text-4xl">MIRA</h1>
-        <p className="text-muted-foreground max-w-md">Homepage implementation coming soon.</p>
+      <main>
+        <HeroSection />
       </main>
     </>
   )
