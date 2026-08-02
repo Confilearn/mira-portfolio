@@ -1,0 +1,36 @@
+import { useRef } from 'react'
+import { useIntroductionReveal } from '@/animations/useIntroductionReveal'
+import { Container, Section } from '@/components/layout'
+import { INTRODUCTION_CONTENT } from '@/constants/introduction'
+import { IntroductionContent } from './IntroductionContent'
+import { IntroductionPortrait } from './IntroductionPortrait'
+
+/**
+ * Editorial Introduction: the calm, text-led section directly beneath the
+ * Hero that establishes Mira's story. Owns the GSAP ScrollTrigger reveal
+ * (label, heading, paragraph, portrait, in sequence) via
+ * useIntroductionReveal, scoped to this section and torn down on unmount.
+ */
+export function IntroductionSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useIntroductionReveal(containerRef)
+
+  return (
+    <Section spacing="lg" aria-labelledby="introduction-heading">
+      <Container width="content">
+        <div ref={containerRef} className="flex flex-col gap-12 lg:gap-16">
+          <IntroductionContent
+            label={INTRODUCTION_CONTENT.label}
+            heading={INTRODUCTION_CONTENT.heading}
+            paragraph={INTRODUCTION_CONTENT.paragraph}
+          />
+          <IntroductionPortrait
+            src={INTRODUCTION_CONTENT.image.src}
+            alt={INTRODUCTION_CONTENT.image.alt}
+          />
+        </div>
+      </Container>
+    </Section>
+  )
+}

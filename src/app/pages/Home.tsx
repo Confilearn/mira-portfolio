@@ -3,6 +3,7 @@ import { Navbar } from '@/components/navigation'
 import { HERO_CONTENT } from '@/constants/hero'
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants/site'
 import { HeroSection } from '@/sections/Hero'
+import { IntroductionSection } from '@/sections/Introduction'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <IntroductionSection />
       </main>
     </>
   )
