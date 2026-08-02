@@ -4,6 +4,7 @@ import { HERO_CONTENT } from '@/constants/hero'
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants/site'
 import { HeroSection } from '@/sections/Hero'
 import { IntroductionSection } from '@/sections/Introduction'
+import { GallerySection } from '@/sections/Gallery'
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <IntroductionSection />
+        <GallerySection />
       </main>
     </>
   )
