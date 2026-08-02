@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { NAV_LINKS } from '@/constants/navigation'
 import { DURATION, EASE } from '@/constants/motion'
@@ -9,10 +10,21 @@ import { NavigationLink } from './NavigationLink'
 export interface MobileMenuOverlayProps {
   open: boolean
   onClose: () => void
+  /** Section id currently in view (scroll-spy), without the leading "#". */
+  activeId?: string | null
 }
 
-/** Fullscreen mobile menu panel — animated, focus-trapped, closes on Escape or link activation. */
-export function MobileMenuOverlay({ open, onClose }: MobileMenuOverlayProps) {
+/**
+ * Fullscreen mobile menu panel — animated, focus-trapped, closes on Escape,
+ * backdrop click, or link activation. Rendered through a portal into
+ * `document.body` rather than in place: the navbar it would otherwise live
+ * inside applies a CSS transform (Framer Motion's entrance) and, once
+ * scrolled, `backdrop-filter` — both of which establish a containing block
+ * for `position: fixed` descendants. Left in place, this panel would be
+ * clipped to the navbar's own (short) box instead of the viewport, which is
+ * exactly the "breaks once you scroll past the Hero" bug this fixes.
+ */
+export function MobileMenuOverlay({ open, onClose, activeId }: MobileMenuOverlayProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -34,7 +46,7 @@ export function MobileMenuOverlay({ open, onClose }: MobileMenuOverlayProps) {
     ease: EASE.editorial,
   }
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -47,9 +59,14 @@ export function MobileMenuOverlay({ open, onClose }: MobileMenuOverlayProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={panelTransition}
+          onClick={onClose}
           className="bg-ink text-ink-foreground fixed inset-0 z-[var(--z-modal)] flex flex-col md:hidden"
         >
-          <nav aria-label="Mobile" className="flex flex-1 items-center justify-center">
+          <nav
+            aria-label="Mobile"
+            onClick={(event) => event.stopPropagation()}
+            className="flex flex-1 items-center justify-center"
+          >
             <ul className="flex flex-col items-center gap-8">
               {NAV_LINKS.map((link, index) => (
                 <motion.li
@@ -64,6 +81,7 @@ export function MobileMenuOverlay({ open, onClose }: MobileMenuOverlayProps) {
                 >
                   <NavigationLink
                     href={link.href}
+                    active={activeId === link.href.slice(1)}
                     onClick={onClose}
                     className="font-display text-display-md font-normal tracking-normal normal-case"
                   >
@@ -75,6 +93,7 @@ export function MobileMenuOverlay({ open, onClose }: MobileMenuOverlayProps) {
           </nav>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   )
 }

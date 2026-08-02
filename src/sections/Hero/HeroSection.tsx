@@ -17,7 +17,7 @@ export function HeroSection() {
   useHeroReveal(containerRef)
 
   return (
-    <section ref={containerRef} className="relative h-svh w-full overflow-hidden">
+    <section id="home" ref={containerRef} className="relative h-svh w-full overflow-hidden">
       <HeroImage src={HERO_CONTENT.image.src} alt={HERO_CONTENT.image.alt} />
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-8 pb-8 sm:gap-10 sm:pb-10 lg:pb-12">
         <HeroContent

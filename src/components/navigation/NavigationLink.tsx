@@ -1,32 +1,43 @@
-import type { ComponentPropsWithoutRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import type { ComponentPropsWithoutRef, MouseEvent } from 'react'
+import { useSectionLinkClick } from '@/hooks/useSectionLinkClick'
 import { cn } from '@/lib/utils'
 
-export interface NavigationLinkProps extends Omit<ComponentPropsWithoutRef<typeof Link>, 'to'> {
-  /** Route path or in-page hash (e.g. "/" or "#gallery"). */
+export interface NavigationLinkProps extends ComponentPropsWithoutRef<'a'> {
+  /** In-page anchor (e.g. "#gallery") or external URL. */
   href: string
-}
-
-function isActiveHref(href: string, pathname: string, hash: string) {
-  return href === '/' ? pathname === '/' && hash === '' : hash === href
+  /** Whether this link represents the section currently in view (scroll-spy driven). */
+  active?: boolean
 }
 
 /**
  * Single navigation item. Shows an animated underline on hover/focus, and a
  * persistent one when active. Color is inherited (`text-current`) so it
- * follows whatever tone the parent navbar/menu sets.
+ * follows whatever tone the parent navbar/menu sets. Clicking an in-page
+ * anchor smooth-scrolls via Lenis instead of jumping natively.
  */
-export function NavigationLink({ href, className, children, ...props }: NavigationLinkProps) {
-  const { pathname, hash } = useLocation()
-  const active = isActiveHref(href, pathname, hash)
+export function NavigationLink({
+  href,
+  active = false,
+  className,
+  children,
+  onClick,
+  ...props
+}: NavigationLinkProps) {
+  const handleSectionClick = useSectionLinkClick(href)
+
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    onClick?.(event)
+    handleSectionClick(event)
+  }
 
   return (
-    <Link
-      to={href}
+    <a
+      href={href}
+      onClick={handleClick}
       aria-current={active ? 'page' : undefined}
       className={cn(
         'group relative inline-flex items-center py-1',
-        'text-body-sm text-current font-sans tracking-[0.15em] uppercase',
+        'text-caption text-current font-sans tracking-[0.12em] uppercase',
         'transition-opacity duration-[var(--duration-fast)] ease-editorial hover:opacity-70',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[currentColor] focus-visible:ring-offset-2',
         className,
@@ -43,6 +54,6 @@ export function NavigationLink({ href, className, children, ...props }: Navigati
           active && 'scale-x-100',
         )}
       />
-    </Link>
+    </a>
   )
 }

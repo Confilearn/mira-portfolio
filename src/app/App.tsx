@@ -1,11 +1,14 @@
 import { HelmetProvider } from 'react-helmet-async'
 import { RouterProvider } from 'react-router-dom'
+import { LenisProvider } from '@/animations/LenisProvider'
 import { router } from '@/app/router'
 
 function App() {
   return (
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <LenisProvider>
+        <RouterProvider router={router} />
+      </LenisProvider>
     </HelmetProvider>
   )
 }

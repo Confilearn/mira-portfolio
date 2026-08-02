@@ -18,7 +18,7 @@ export function FooterSection() {
   useFooterReveal(containerRef)
 
   return (
-    <Section as="footer" className="py-6" aria-label="Site footer">
+    <Section as="footer" className="border-border border-t py-6" aria-label="Site footer">
       <Container width="content">
         <div
           ref={containerRef}

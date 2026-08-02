@@ -23,7 +23,7 @@ export function AgencySection() {
   useAgencyReveal(containerRef)
 
   return (
-    <Section id="agency" tone="ink" spacing="lg" aria-labelledby="agency-heading">
+    <Section id="agency" tone="ink" spacing="md" aria-labelledby="agency-heading">
       <Container width="narrow">
         <div ref={containerRef} className="flex flex-col items-center gap-6 text-center">
           <SectionLabel data-agency-label className="text-accent">
@@ -43,14 +43,17 @@ export function AgencySection() {
             href={cta.href}
             className={cn(
               buttonVariants({ intent: 'secondary', size: 'lg' }),
-              'group mt-2 border-ink-foreground text-ink-foreground no-underline hover:bg-ink-foreground hover:text-ink hover:no-underline',
+              'group mt-4 h-auto border-ink-foreground/70 px-10 py-4',
+              'text-label tracking-label text-ink-foreground uppercase no-underline',
+              'transition-[background-color,border-color,color] duration-[var(--duration-normal)] ease-editorial',
+              'hover:border-ink-foreground hover:bg-ink-foreground hover:text-ink hover:no-underline',
               'focus-visible:ring-ink-foreground focus-visible:ring-offset-ink',
             )}
           >
             {cta.label}
             <ArrowRight
               aria-hidden="true"
-              className="size-4 transition-transform duration-[var(--duration-fast)] group-hover:translate-x-1"
+              className="size-4 transition-transform duration-[var(--duration-normal)] ease-editorial group-hover:translate-x-1.5"
             />
           </ExternalLink>
         </div>

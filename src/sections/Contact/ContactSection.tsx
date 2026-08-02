@@ -28,7 +28,11 @@ export function ContactSection() {
             <SectionLabel data-contact-label className="mb-4">
               {sheet.label}
             </SectionLabel>
-            <EditorialHeading id="contact-sheet-heading" data-contact-heading className="text-display-md">
+            <EditorialHeading
+              id="contact-sheet-heading"
+              data-contact-heading
+              className="text-display-md"
+            >
               {sheet.heading}
             </EditorialHeading>
             <ContactSheetStrip images={sheet.images} className="mt-8 lg:mt-10" />
@@ -36,9 +40,9 @@ export function ContactSection() {
         </Container>
       </Section>
 
-      <Section tone="ink" spacing="lg" aria-labelledby="contact-cta-heading">
+      <Section tone="ink" spacing="md" aria-labelledby="contact-cta-heading">
         <Container width="narrow">
-          <div data-contact-cta className="flex flex-col items-center gap-8 text-center">
+          <div data-contact-cta className="flex flex-col items-center gap-6 text-center">
             <EditorialHeading id="contact-cta-heading" data-contact-cta-heading>
               {cta.heading}
             </EditorialHeading>

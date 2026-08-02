@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Container } from '@/components/layout'
+import { NAV_SECTION_IDS } from '@/constants/navigation'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { useScrolled } from '@/hooks/useScrolled'
+import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { cn } from '@/lib/utils'
 import { getEntranceOffset, getEntranceTransition } from '@/utils/motion'
 import { DesktopNavigation } from './DesktopNavigation'
@@ -21,6 +24,8 @@ import { MobileNavigation } from './MobileNavigation'
 export function Navbar() {
   const scrolled = useScrolled({ threshold: 80 })
   const prefersReducedMotion = usePrefersReducedMotion()
+  const activeId = useScrollSpy(NAV_SECTION_IDS)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <motion.header
@@ -28,8 +33,12 @@ export function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={getEntranceTransition(prefersReducedMotion, 0.35)}
       className={cn(
-        'fixed inset-x-0 top-0 z-[var(--z-nav)]',
+        'fixed inset-x-0 top-0',
         'transition-[background-color,border-color,backdrop-filter] duration-[var(--duration-normal)] ease-editorial',
+        // Raised above the mobile overlay (z-modal) while it's open, so the
+        // logo and the hamburger's morphed close (X) icon stay visible and
+        // interactive on top of the fullscreen panel.
+        mobileMenuOpen ? 'z-[var(--z-toast)]' : 'z-[var(--z-nav)]',
         scrolled
           ? 'bg-background/90 border-border supports-[backdrop-filter]:backdrop-blur-md border-b text-foreground'
           : 'border-b border-transparent bg-transparent text-ink-foreground',
@@ -43,8 +52,12 @@ export function Navbar() {
         )}
       >
         <Logo />
-        <DesktopNavigation className="hidden md:block" />
-        <MobileNavigation />
+        <DesktopNavigation className="hidden md:block" activeId={activeId} />
+        <MobileNavigation
+          open={mobileMenuOpen}
+          onOpenChange={setMobileMenuOpen}
+          activeId={activeId}
+        />
       </Container>
     </motion.header>
   )

@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { Navbar } from '@/components/navigation'
+import { SEO } from '@/components/utility'
 import { HERO_CONTENT } from '@/constants/hero'
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants/site'
 import { HeroSection } from '@/sections/Hero'
@@ -14,9 +15,13 @@ import { FooterSection } from '@/sections/Footer'
 export default function Home() {
   return (
     <>
+      <SEO
+        title={SITE_TITLE}
+        description={SITE_DESCRIPTION}
+        path="/"
+        image={HERO_CONTENT.image.src}
+      />
       <Helmet>
-        <title>{SITE_TITLE}</title>
-        <meta name="description" content={SITE_DESCRIPTION} />
         <link rel="preload" as="image" href={HERO_CONTENT.image.src} fetchPriority="high" />
       </Helmet>
       <Navbar />
