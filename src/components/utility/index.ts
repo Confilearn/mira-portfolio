@@ -1,5 +1,6 @@
 export { IconWrapper, type IconWrapperProps } from './IconWrapper'
 export { ExternalLink, type ExternalLinkProps } from './ExternalLink'
 export { SocialLink, type SocialLinkProps } from './SocialLink'
+export { ContactLink, type ContactLinkProps } from './ContactLink'
 export { SectionDivider, type SectionDividerProps } from './SectionDivider'
 export { SectionHeader, type SectionHeaderProps } from './SectionHeader'

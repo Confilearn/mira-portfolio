@@ -8,6 +8,7 @@ import { GallerySection } from '@/sections/Gallery'
 import { AboutSection } from '@/sections/About'
 import { AgencySection } from '@/sections/Agency'
 import { ServicesSection } from '@/sections/Services'
+import { ContactSection } from '@/sections/Contact'
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         <AboutSection />
         <AgencySection />
         <ServicesSection />
+        <ContactSection />
       </main>
     </>
   )
