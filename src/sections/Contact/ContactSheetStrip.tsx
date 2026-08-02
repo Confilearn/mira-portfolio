@@ -8,27 +8,27 @@ export interface ContactSheetStripProps {
 }
 
 /**
- * Horizontal filmstrip of proof-sheet thumbnails, evoking a photographer's
- * contact sheet. Scrolls on narrow viewports where all frames can't fit
- * side by side. `data-contact-item` is the hook targeted by
+ * Contact sheet grid: two columns stacking into three rows on mobile, three
+ * on tablet, and a single row spanning the full container width on desktop —
+ * matching the approved design's evenly-spaced desktop strip. Each frame
+ * carries a proof-sheet frame number, echoing the numbered list pattern used
+ * in the Services section. `data-contact-item` is the hook targeted by
  * useContactReveal's stagger.
  */
 export function ContactSheetStrip({ images, className }: ContactSheetStripProps) {
   return (
-    <ul
-      className={cn(
-        'flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden',
-        className,
-      )}
-    >
-      {images.map((image) => (
-        <li key={image.id} data-contact-item className="w-24 shrink-0 sm:w-28 lg:w-32">
+    <ul className={cn('grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-6', className)}>
+      {images.map((image, index) => (
+        <li key={image.id} data-contact-item>
           <LazyImage
             src={image.src}
             alt={image.alt}
             aspectRatio="1 / 1"
             className="transition-transform duration-[var(--duration-slow)] ease-editorial hover:scale-[1.04]"
           />
+          <span className="text-label text-muted-foreground mt-2 block font-sans">
+            {String(index + 1).padStart(2, '0')}
+          </span>
         </li>
       ))}
     </ul>
