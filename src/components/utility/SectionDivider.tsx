@@ -3,6 +3,7 @@ import { Divider } from '@/components/layout'
 import type { SectionSpacing } from '@/types/design-system'
 
 const SPACING_CLASSES: Record<SectionSpacing, string> = {
+  null: '',
   sm: 'my-section-sm',
   md: 'my-section-md',
   lg: 'my-section-lg',

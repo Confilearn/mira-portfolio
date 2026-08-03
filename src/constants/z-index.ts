@@ -9,4 +9,5 @@ export const Z_INDEX = {
   overlay: 30,
   modal: 40,
   toast: 50,
+  loader: 60,
 } as const

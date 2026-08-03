@@ -43,8 +43,8 @@ export function AgencySection() {
             href={cta.href}
             className={cn(
               buttonVariants({ intent: 'secondary', size: 'lg' }),
-              'group mt-4 h-auto border-ink-foreground/70 px-10 py-4',
-              'text-label tracking-label text-ink-foreground uppercase no-underline',
+              'group mt-4 h-auto max-w-full border-ink-foreground/70 px-6 py-4 whitespace-normal sm:px-10',
+              'text-label tracking-label text-ink-foreground text-center uppercase no-underline',
               'transition-[background-color,border-color,color] duration-[var(--duration-normal)] ease-editorial',
               'hover:border-ink-foreground hover:bg-ink-foreground hover:text-ink hover:no-underline',
               'focus-visible:ring-ink-foreground focus-visible:ring-offset-ink',

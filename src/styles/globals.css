@@ -81,6 +81,7 @@
   --z-overlay: 30;
   --z-modal: 40;
   --z-toast: 50;
+  --z-loader: 60;
 }
 
 @theme inline {
