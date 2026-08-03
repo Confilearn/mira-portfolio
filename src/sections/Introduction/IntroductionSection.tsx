@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useIntroductionReveal } from '@/animations/useIntroductionReveal'
+import { useParallax } from '@/animations/useParallax'
 import { Container, Section } from '@/components/layout'
 import { INTRODUCTION_CONTENT } from '@/constants/introduction'
 import { IntroductionContent } from './IntroductionContent'
@@ -9,12 +10,16 @@ import { IntroductionPortrait } from './IntroductionPortrait'
  * Editorial Introduction: the calm, text-led section directly beneath the
  * Hero that establishes Mira's story. Owns the GSAP ScrollTrigger reveal
  * (label, heading, paragraph, portrait, in sequence) via
- * useIntroductionReveal, scoped to this section and torn down on unmount.
+ * useIntroductionReveal, scoped to this section and torn down on unmount. A
+ * separate, subtle scroll-scrubbed parallax (useParallax) drifts the
+ * portrait itself — the entrance targets the image's wrapper, so the two
+ * never touch the same element.
  */
 export function IntroductionSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useIntroductionReveal(containerRef)
+  useParallax(containerRef, { selector: '[data-intro-image] img' })
 
   return (
     <Section spacing="lg" aria-labelledby="introduction-heading">

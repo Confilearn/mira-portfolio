@@ -10,8 +10,10 @@ const SELECTORS = {
 
 /**
  * Scroll-triggered fade-in for the footer's closing bar: copyright then
- * credit reveal in sequence, very subtly, once the footer approaches the
- * viewport. Scoped to `containerRef` and torn down on unmount, per
+ * credit reveal in a slow, unhurried sequence once the footer approaches the
+ * viewport — the site's final beat, deliberately paced slower than the
+ * section reveals above it so the experience ends on a calm note rather than
+ * a snap. Scoped to `containerRef` and torn down on unmount, per
  * docs/animation-principles.md's "initialize only when the section
  * approaches the viewport" rule.
  */
@@ -31,14 +33,14 @@ export function useFooterReveal(containerRef: RefObject<HTMLElement | null>) {
       gsap
         .timeline({
           defaults: { ease: GSAP_EASE.editorial },
-          scrollTrigger: { trigger: root, start: 'top 90%', once: true },
+          scrollTrigger: { trigger: root, start: 'top 92%', once: true },
         })
-        .fromTo(SELECTORS.copyright, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: DURATION.fast })
+        .fromTo(SELECTORS.copyright, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: DURATION.slow })
         .fromTo(
           SELECTORS.credit,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: DURATION.fast },
-          '-=0.15',
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: DURATION.slow },
+          '-=0.4',
         )
     }, root)
 
