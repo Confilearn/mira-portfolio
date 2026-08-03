@@ -11,7 +11,7 @@ export interface CaptionProps extends ComponentPropsWithoutRef<'span'> {
 /** Small muted text for image captions and photo credits. */
 export function Caption({ as: Tag = 'span', className, children, ...props }: CaptionProps) {
   return (
-    <Tag className={cn('text-caption text-muted-foreground font-sans', className)} {...props}>
+    <Tag className={cn('text-[11.5px] text-muted-foreground font-sans', className)} {...props}>
       {children}
     </Tag>
   )

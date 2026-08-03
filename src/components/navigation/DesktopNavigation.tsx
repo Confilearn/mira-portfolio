@@ -14,7 +14,11 @@ export function DesktopNavigation({ className, activeId }: DesktopNavigationProp
       <ul className="flex items-center gap-7 lg:gap-9">
         {NAV_LINKS.map((link) => (
           <li key={link.href}>
-            <NavigationLink href={link.href} active={activeId === link.href.slice(1)}>
+            <NavigationLink
+              href={link.href}
+              active={activeId === link.href.slice(1)}
+              className="text-[11.5px]"
+            >
               {link.label}
             </NavigationLink>
           </li>

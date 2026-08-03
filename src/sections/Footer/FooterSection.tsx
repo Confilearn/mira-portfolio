@@ -29,7 +29,7 @@ export function FooterSection() {
           <ExternalLink
             data-footer-credit
             href={credit.href}
-            className="text-caption text-muted-foreground rounded-sm underline-offset-4 transition-colors duration-[var(--duration-fast)] ease-editorial hover:text-foreground focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="text-[11.5px] text-muted-foreground rounded-sm underline-offset-4 transition-colors duration-[var(--duration-fast)] ease-editorial hover:text-foreground focus-visible:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Designed &amp; Developed by {credit.label}
           </ExternalLink>
