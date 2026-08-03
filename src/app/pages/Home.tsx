@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { Navbar } from '@/components/navigation'
 import { SEO } from '@/components/utility'
 import { HERO_CONTENT } from '@/constants/hero'
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/constants/site'
+import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_TITLE } from '@/constants/site'
 import { HeroSection } from '@/sections/Hero'
 import { IntroductionSection } from '@/sections/Introduction'
 import { GallerySection } from '@/sections/Gallery'
@@ -20,6 +20,7 @@ export default function Home() {
         description={SITE_DESCRIPTION}
         path="/"
         image={HERO_CONTENT.image.src}
+        keywords={SITE_KEYWORDS}
       />
       <Helmet>
         <link rel="preload" as="image" href={HERO_CONTENT.image.src} fetchPriority="high" />

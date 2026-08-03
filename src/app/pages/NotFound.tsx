@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <>
       <SEO
-        title="Page Not Found — MIRA"
+        title="Page Not Found | Mira"
         description="The page you're looking for doesn't exist. Return to the MIRA homepage."
         path="/404"
         noIndex

@@ -2,14 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>MIRA — Editorial Fashion Model</title>
+    <!-- Favicons. PNG/manifest icons are placeholders — replace with final assets before launch. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>Mira | Editorial Fashion Model</title>
     <meta
       name="description"
-      content="MIRA is an international editorial fashion model represented by Zane Models, working across editorial, runway, campaign and commercial work."
+      content="Mira is a Nigerian editorial and runway model based in London, United Kingdom, represented by Zane Models and available for editorial, campaign and runway work across Europe."
     />
+    <meta
+      name="keywords"
+      content="Mira, editorial model, runway model, Nigerian model, London model, UK fashion model, European fashion model, campaign model, Zane Models"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mira-portfolio.example.com/" />
+
+    <!-- Open Graph — placeholders (url, image) until the site has a real domain and dedicated share asset. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MIRA" />
+    <meta property="og:title" content="Mira | Editorial Fashion Model" />
+    <meta
+      property="og:description"
+      content="Mira is a Nigerian editorial and runway model based in London, United Kingdom, represented by Zane Models and available for editorial, campaign and runway work across Europe."
+    />
+    <meta property="og:url" content="https://mira-portfolio.example.com/" />
+    <meta property="og:image" content="https://mira-portfolio.example.com/og-image.jpg" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mira" />
+    <meta name="twitter:title" content="Mira | Editorial Fashion Model" />
+    <meta
+      name="twitter:description"
+      content="Mira is a Nigerian editorial and runway model based in London, United Kingdom, represented by Zane Models and available for editorial, campaign and runway work across Europe."
+    />
+    <meta name="twitter:image" content="https://mira-portfolio.example.com/og-image.jpg" />
+
+    <!-- Structured data: Person/Model. Placeholders noted inline for facts not yet finalized. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mira",
+        "alternateName": "Miracle Chukwuemeka",
+        "jobTitle": "Editorial Fashion Model",
+        "description": "Nigerian editorial and runway model based in London, United Kingdom, available for editorial, campaign and runway work across Europe.",
+        "url": "https://mira-portfolio.example.com/",
+        "image": "https://mira-portfolio.example.com/og-image.jpg",
+        "nationality": "Nigerian",
+        "birthPlace": {
+          "@type": "Place",
+          "name": "Lagos, Nigeria"
+        },
+        "homeLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressCountry": "GB"
+          }
+        },
+        "memberOf": {
+          "@type": "Organization",
+          "name": "Zane Models",
+          "url": "https://zanemodels.com/"
+        },
+        "sameAs": ["https://www.instagram.com/miraclechukwuemeka_"]
+      }
+    </script>
 
     <!-- Matches --ink in globals.css. Set inline, ahead of the stylesheet, so the very first paint is the loader's charcoal, not a white flash. -->
     <style>
