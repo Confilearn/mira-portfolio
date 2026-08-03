@@ -33,7 +33,7 @@ export function useFooterReveal(containerRef: RefObject<HTMLElement | null>) {
       gsap
         .timeline({
           defaults: { ease: GSAP_EASE.editorial },
-          scrollTrigger: { trigger: root, start: 'top 92%', once: true },
+          scrollTrigger: { trigger: root, start: 'bottom bottom', once: true },
         })
         .fromTo(SELECTORS.copyright, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: DURATION.slow })
         .fromTo(
