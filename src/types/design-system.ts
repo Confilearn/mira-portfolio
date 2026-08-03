@@ -7,7 +7,7 @@ export type Size = 'sm' | 'md' | 'lg'
 export type ContainerWidth = 'narrow' | 'content' | 'wide' | 'full'
 
 /** Section vertical-rhythm variants — mirrors the --spacing-section-* tokens. */
-export type SectionSpacing = 'sm' | 'md' | 'lg'
+export type SectionSpacing = 'sm' | 'md' | 'lg' | 'null'
 
 /** Light (default) or inverse (--ink) surface, for full-bleed dark sections. */
 export type Tone = 'light' | 'ink'

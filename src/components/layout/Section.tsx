@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import type { SectionSpacing, Tone } from '@/types/design-system'
 
 const SPACING_CLASSES: Record<SectionSpacing, string> = {
+  null: '',
   sm: 'py-section-sm',
   md: 'py-section-md',
   lg: 'py-section-lg',
