@@ -34,6 +34,7 @@ export function GalleryGrid({ images, onImageOpen, className }: GalleryGridProps
           image={image}
           index={index}
           total={images.length}
+          column={index % COLUMN_COUNT}
           inOffsetColumn={index % COLUMN_COUNT === OFFSET_COLUMN}
           onOpen={onImageOpen}
         />

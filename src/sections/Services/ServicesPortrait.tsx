@@ -19,6 +19,12 @@ export interface ServicesPortraitProps {
  * viewport) and switching categories feels instant rather than waiting on a
  * fresh image request. Only the active frame carries real alt text; the rest
  * are hidden from assistive tech until they become the visible one.
+ *
+ * The switch is a crossfade with a 6px upward drift and a 1.02 settle — the
+ * incoming frame rises into place rather than sliding, so the interaction
+ * reads as a page being turned, not a carousel advancing. Under
+ * prefers-reduced-motion the frames simply swap, via the site-wide transition
+ * reset in globals.css.
  */
 export function ServicesPortrait({ images, activeIndex, className }: ServicesPortraitProps) {
   return (
@@ -39,7 +45,9 @@ export function ServicesPortrait({ images, activeIndex, className }: ServicesPor
             className={cn(
               'absolute inset-0 h-full w-full object-cover object-top',
               'transition-[opacity,transform] duration-[var(--duration-slow)] ease-editorial',
-              active ? 'scale-[1.015] opacity-100' : 'scale-100 opacity-0',
+              active
+                ? 'translate-y-0 scale-[1.02] opacity-100'
+                : 'translate-y-1.5 scale-100 opacity-0',
             )}
           />
         )

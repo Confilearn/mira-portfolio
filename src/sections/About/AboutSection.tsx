@@ -13,14 +13,19 @@ import { AboutDetails } from './AboutDetails'
  * sequence) via useAboutReveal, scoped to this section and torn down on
  * unmount. A separate, subtle scroll-scrubbed parallax (useParallax) drifts
  * the runway portrait itself — the entrance targets the image's wrapper, so
- * the two never touch the same element.
+ * the two never touch the same element. That wrapper is also the parallax's
+ * scroll trigger, so the drift is measured against the photograph's own pass
+ * through the viewport rather than the whole two-column row's.
  */
 export function AboutSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { label, heading, image, details } = ABOUT_CONTENT
 
   useAboutReveal(containerRef)
-  useParallax(containerRef, { selector: '[data-about-image] img' })
+  useParallax(containerRef, {
+    selector: '[data-about-image] img',
+    trigger: '[data-about-image]',
+  })
 
   return (
     <Section id="about" spacing="lg" aria-labelledby="about-heading">

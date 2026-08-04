@@ -13,13 +13,18 @@ import { IntroductionPortrait } from './IntroductionPortrait'
  * useIntroductionReveal, scoped to this section and torn down on unmount. A
  * separate, subtle scroll-scrubbed parallax (useParallax) drifts the
  * portrait itself — the entrance targets the image's wrapper, so the two
- * never touch the same element.
+ * never touch the same element. That wrapper is also the parallax's scroll
+ * trigger rather than this section, so the drift starts when the portrait
+ * enters the viewport, not when the copy above it does.
  */
 export function IntroductionSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useIntroductionReveal(containerRef)
-  useParallax(containerRef, { selector: '[data-intro-image] img' })
+  useParallax(containerRef, {
+    selector: '[data-intro-image] img',
+    trigger: '[data-intro-image]',
+  })
 
   return (
     <Section spacing="lg" aria-labelledby="introduction-heading">

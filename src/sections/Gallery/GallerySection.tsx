@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useGalleryParallax } from '@/animations/useGalleryParallax'
 import { useGalleryReveal } from '@/animations/useGalleryReveal'
 import { Container, Section } from '@/components/layout'
 import { GalleryGrid, Lightbox } from '@/components/gallery'
@@ -11,7 +12,10 @@ import { GalleryHeader } from './GalleryHeader'
  * see GalleryGrid) showcasing Mira's modelling work, with a shared,
  * production-ready Lightbox for fullscreen viewing. Owns the GSAP
  * ScrollTrigger stagger reveal via useGalleryReveal and the lightbox's
- * open/active-index state via useLightbox.
+ * open/active-index state via useLightbox. A separate, scroll-scrubbed
+ * per-column drift (useGalleryParallax) gives the grid its depth — the reveal
+ * animates each `li`, the parallax each `li`'s button, so the two never touch
+ * the same element.
  */
 export function GallerySection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -19,6 +23,7 @@ export function GallerySection() {
   const { activeIndex, isOpen, open, close, next, previous } = useLightbox(images.length)
 
   useGalleryReveal(containerRef)
+  useGalleryParallax(containerRef)
 
   return (
     <Section id="gallery" spacing="lg" aria-labelledby="gallery-heading">
