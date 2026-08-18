@@ -14,7 +14,7 @@ export interface IntroductionContentProps {
  */
 export function IntroductionContent({ label, heading, paragraph }: IntroductionContentProps) {
   return (
-    <div className="max-w-3xl">
+    <div data-intro-copy className="max-w-3xl">
       <SectionLabel data-intro-label className="mb-4">
         {label}
       </SectionLabel>

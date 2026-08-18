@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useIntroductionReveal } from '@/animations/useIntroductionReveal'
 import { useParallax } from '@/animations/useParallax'
+import { useScrollSpeed } from '@/animations/useScrollSpeed'
 import { Container, Section } from '@/components/layout'
 import { INTRODUCTION_CONTENT } from '@/constants/introduction'
 import { IntroductionContent } from './IntroductionContent'
@@ -15,7 +16,10 @@ import { IntroductionPortrait } from './IntroductionPortrait'
  * portrait itself — the entrance targets the image's wrapper, so the two
  * never touch the same element. That wrapper is also the parallax's scroll
  * trigger rather than this section, so the drift starts when the portrait
- * enters the viewport, not when the copy above it does.
+ * enters the viewport, not when the copy above it does. The copy block
+ * itself is slowed to 80% of the page scroll speed via useScrollSpeed, which
+ * drifts only its wrapper — the entrance tweens target the label, heading
+ * and paragraph inside it, so again the two never share an element.
  */
 export function IntroductionSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -25,6 +29,7 @@ export function IntroductionSection() {
     selector: '[data-intro-image] img',
     trigger: '[data-intro-image]',
   })
+  useScrollSpeed(containerRef, { selector: '[data-intro-copy]', speed: 0.8 })
 
   return (
     <Section spacing="lg" aria-labelledby="introduction-heading">
