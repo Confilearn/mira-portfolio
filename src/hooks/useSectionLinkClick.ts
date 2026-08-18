@@ -3,7 +3,7 @@ import { useLenis } from '@/hooks/useLenis'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
 /** Vertical offset (px) reserved for the fixed navbar when landing on a section. */
-const NAV_SCROLL_OFFSET = -96
+export const NAV_SCROLL_OFFSET = -96
 
 /**
  * Click handler for in-page anchor links (`#gallery`, `#about`, …): smoothly

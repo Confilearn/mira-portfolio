@@ -1,3 +1,5 @@
 export { ServicesSection } from './ServicesSection'
 export { ServicesList, type ServicesListProps } from './ServicesList'
 export { ServicesPortrait, type ServicesPortraitProps } from './ServicesPortrait'
+export { ServicesGallery, type ServicesGalleryProps } from './ServicesGallery'
+export { SERVICES_IMAGE_SELECTOR, servicesImageId } from './imageTargets'
